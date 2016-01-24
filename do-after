@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+    echo "$0 <pid> <command> [args...]" 2>&1
+    exit 1
+fi
+
+while true; do
+    if [ -z "$( ps aux | awk '{ print $2 }' | grep $1 )" ]; then
+        break
+    fi
+
+    sleep 1
+done
+
+shift
+eval "$@"

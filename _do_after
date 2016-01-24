@@ -1,0 +1,16 @@
+#compdef do-after
+
+local state line
+local -i ret=1
+
+_arguments -C \
+    '1: :_pids' \
+    '*: :->cmds' && ret=0
+
+case $state in
+    cmds)
+        shift words
+        shift words
+        (( CURRENT -= 2 ))
+        _normal
+esac
