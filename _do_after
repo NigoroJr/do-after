@@ -4,6 +4,8 @@ local state line
 local -i ret=1
 
 _arguments -C \
+    '-h[show help]' \
+    '-i[interval to check if process is running]:' \
     '1: :_pids' \
     '*: :->cmds' && ret=0
 
