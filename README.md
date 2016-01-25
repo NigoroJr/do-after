@@ -23,7 +23,7 @@ $ mplayer some_file
 # Oh wait!
 # (Open another terminal)
 $ do-after 12345 mplayer another_file &
-$ disown $( pgrep do-after )
+$ disown
 # (Close terminal)
 ```
 
