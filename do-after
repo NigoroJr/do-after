@@ -2,7 +2,7 @@
 
 _DO_AFTER_INTERVAL=1
 
-function __do_after_help() {
+__do_after_help() {
     echo "Usage: $0 [-h] [-i <interval>] <pid> <command> [args...]"
 }
 
