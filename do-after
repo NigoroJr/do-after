@@ -3,7 +3,7 @@
 _DO_AFTER_INTERVAL=1
 
 __do_after_help() {
-    echo "Usage: $0 [-h] [-i <interval>] <pid> <command> [args...]"
+    echo "Usage: $0 [-h] [-i <interval>] <pid|name> <command> [args...]"
 }
 
 while getopts 'hi:' flag; do
@@ -24,13 +24,19 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+_PID="$1"
+shift
+if [ -z "$( echo $PID | grep -o '^[0-9]*$' )" ]; then
+    # Process name was given
+    _PID="$( pgrep $PID | head -n 1 )"
+fi
+
 while true; do
-    if [ -z "$( ps aux | awk '{ print $2 }' | grep $1 )" ]; then
+    if [ -z "$( ps aux | awk '{ print $2 }' | grep $_PID )" ]; then
         break
     fi
 
     sleep $_DO_AFTER_INTERVAL
 done
 
-shift
 exec "$@"
