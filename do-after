@@ -26,9 +26,9 @@ fi
 
 _PID="$1"
 shift
-if [ -z "$( echo $PID | grep -o '^[0-9]*$' )" ]; then
+if [ -z "$( echo $_PID | grep -o '^[0-9]*$' )" ]; then
     # Process name was given
-    _PID="$( pgrep $PID | head -n 1 )"
+    _PID="$( pgrep $_PID | head -n 1 )"
 fi
 
 while true; do
